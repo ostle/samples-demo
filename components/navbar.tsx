@@ -1,11 +1,11 @@
 "use client";
 
 import { Search, User, ShoppingBag } from "lucide-react";
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
 	const [isMounted, setIsMounted] = useState(false);
+	const [isScrolled, setIsScrolled] = useState(false);
 
 	const handleEnter = () => {
 		setIsMounted(true);
@@ -15,30 +15,72 @@ const Navbar = () => {
 		setIsMounted(false);
 	};
 
+	const handleScroll = () => {
+		setIsScrolled(window.scrollY > window.innerHeight);
+	};
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
+
 	return (
 		<div>
-			<div className='navbar bg-transparent fixed top-0 left-0 w-full z-10'>
+			<div
+				className={`navbar fixed top-0 left-0 w-full z-10 ${
+					isScrolled || isMounted ? "bg-white" : ""
+				}`}
+				onMouseEnter={handleEnter}
+				onMouseLeave={handleExit}
+			>
 				<div
-					className={`flex flex-col md:flex-row justify-between items-center px-4 py-2 ${
+					className={`flex justify-between items-center px-4 py-2 ${
 						isMounted
 							? "bg-white text-black"
 							: "text-white hover:bg-white hover:text-black"
 					}`}
 				>
-					<div className='flex items-center space-x-4 text-sm md:ml-8 mt-4 md:mt-0'>
+					<div className='flex items-center space-x-4 text-sm'>
 						<div
-							className='text-sm leading-tight'
-							onMouseEnter={handleEnter}
+							className={`text-sm leading-tight ${
+								isMounted || isScrolled ? "text-black" : ""
+							}`}
 						>
 							SHOP
 						</div>
-						<div className='text-sm leading-tight'>COLLECTIONS</div>
-						<div className='text-sm leading-tight'>BRAND</div>
+						<div
+							className={`text-sm leading-tight ${
+								isMounted || isScrolled ? "text-black" : ""
+							}`}
+						>
+							COLLECTIONS
+						</div>
+						<div
+							className={`text-sm leading-tight ${
+								isMounted || isScrolled ? "text-black" : ""
+							}`}
+						>
+							BRAND
+						</div>
 					</div>
-					<div className='font-bold leading-tight text-xl md:text-3xl mt-4'>
-						SAMPLES
+					<div
+						className={`font-bold leading-tight text-xl md:text-3xl ${
+							isMounted || isScrolled ? "text-black" : ""
+						}`}
+					>
+						<div className='flex items-center justify-center'>
+							SAMPLES
+						</div>
 					</div>
-					<div className='flex items-center space-x-2 md:space-x-4 mr-4 mt-4 md:mt-0'>
+					<div
+						className={`flex items-center space-x-2 ${
+							isMounted || isScrolled
+								? "text-black"
+								: "hover:text-black"
+						}`}
+					>
 						<Search size={20} />
 						<User size={20} />
 						<ShoppingBag size={20} />
@@ -46,9 +88,9 @@ const Navbar = () => {
 				</div>
 				{isMounted && (
 					<div
-						className='box-cover h-1/3 bg-white'
-						onMouseEnter={handleEnter}
-						onMouseLeave={handleExit}
+						className={`box-cover h-1/3 ${
+							isScrolled ? "bg-white" : ""
+						}`}
 					>
 						<div className='flex flex-col md:flex-row justify-between px-4 py-2 mb-0'>
 							<div className='w-full md:w-3/4'>
@@ -70,7 +112,7 @@ const Navbar = () => {
 							</div>
 							<div className='w-full md:w-1/4 mt-4 md:mt-0'>
 								<div className='box-cover'>
-									<Image
+									<img
 										src='https://acdn.mitiendanube.com/stores/001/759/686/products/0n7a91281-a0a96fdf1f78af4c4616881494937969-1024-1024.webp'
 										alt='Imagen'
 										className='object-cover w-full h-full'
