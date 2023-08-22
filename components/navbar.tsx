@@ -19,13 +19,13 @@ const Navbar = () => {
 		<div>
 			<div className='navbar bg-transparent fixed top-0 left-0 w-full z-10'>
 				<div
-					className={`flex justify-between items-center px-4 py-2 ${
+					className={`flex flex-col md:flex-row justify-between items-center px-4 py-2 ${
 						isMounted
 							? "bg-white text-black"
 							: "text-white hover:bg-white hover:text-black"
 					}`}
 				>
-					<div className='flex items-center space-x-4 text-sm ml-8 mt-4'>
+					<div className='flex items-center space-x-4 text-sm md:ml-8 mt-4 md:mt-0'>
 						<div
 							className='text-sm leading-tight'
 							onMouseEnter={handleEnter}
@@ -35,10 +35,10 @@ const Navbar = () => {
 						<div className='text-sm leading-tight'>COLLECTIONS</div>
 						<div className='text-sm leading-tight'>BRAND</div>
 					</div>
-					<div className='font-bold leading-tight text-3xl mt-4'>
+					<div className='font-bold leading-tight text-xl md:text-3xl mt-4'>
 						SAMPLES
 					</div>
-					<div className='flex items-center space-x-4 mr-8 mt-4'>
+					<div className='flex items-center space-x-2 md:space-x-4 mr-4 mt-4 md:mt-0'>
 						<Search size={20} />
 						<User size={20} />
 						<ShoppingBag size={20} />
