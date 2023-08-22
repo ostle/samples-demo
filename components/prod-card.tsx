@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 interface ProdCardProps {
@@ -8,11 +10,12 @@ const ProdCard: React.FC<ProdCardProps> = ({ imageSrc }) => {
 	return (
 		<div className='group cursor-pointer rounded-xl p-3 space-y-4'>
 			{/* Image & actions */}
-			<div className='aspect-square rounded-xl bg-gray-100 relative'>
+			<div className='aspect-square bg-gray-100 relative'>
 				<Image
 					src={imageSrc}
 					alt=''
-					fill
+					layout='fill'
+					objectFit='cover'
 					className='aspect-square object-cover rounded-md'
 				/>
 			</div>

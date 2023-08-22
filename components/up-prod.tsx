@@ -1,3 +1,5 @@
+"use client";
+
 import ProdCard from "./prod-card";
 
 const UpProd: React.FC = () => {
@@ -15,7 +17,7 @@ const UpProd: React.FC = () => {
 		"https://acdn.mitiendanube.com/stores/001/759/686/products/0n7a2394-21-bf69f1cae01924902916812333649091-1024-1024.webp";
 
 	return (
-		<div className='grid grid-cols-6 gap-2'>
+		<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-2'>
 			<ProdCard imageSrc={image} />
 			<ProdCard imageSrc={image2} />
 			<ProdCard imageSrc={image3} />
